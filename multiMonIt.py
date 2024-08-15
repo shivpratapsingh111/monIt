@@ -27,13 +27,12 @@ async def notify_telegram(message):
                 print(f"Failed to send message. Status code: {response.status}")
 
 def fetch_status(url):
-    return url, 200
-    # try:
-    #     response = requests.get(url, timeout=10)
-    #     return url, response.status_code
-    # except (requests.RequestException, ConnectionError, requests.Timeout) as e:
-    #     print(f"[!] Error: {e} for {url}")
-    #     return url, None
+    try:
+        response = requests.get(url, timeout=10)
+        return url, response.status_code
+    except (requests.RequestException, ConnectionError, requests.Timeout) as e:
+        print(f"[!] Error: {e} for {url}")
+        return url, None
 
 def load_subdomains(subdomain_file):
     if os.path.exists(subdomain_file):
